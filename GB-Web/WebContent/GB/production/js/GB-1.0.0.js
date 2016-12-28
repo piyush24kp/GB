@@ -369,6 +369,7 @@ angular
         vm.myFamily = getFamily;
 
         function getFamily(uid) {
+            resetParam();
             params.uid = uid;
             return authfactory.getFamily(params).then(function successCallback(response) {
                 if (response.status === 200) {
@@ -387,13 +388,14 @@ angular
         vm.searchUser = searchUser;
 
         function searchUser(name) {
+            resetParam();
             params.name = name;
             return authfactory.getUser(params).then(function successCallback(response) {
                 if (response.status === 200) {
                     response = response.data;
 
                     vm.allUsers = response;
-
+                    return response;
                 }
             }, function errorCallback(response) {
                 // called asynchronously if an error occurs
@@ -401,6 +403,10 @@ angular
                 return false;
             });
 
+        }
+
+        function resetParam() {
+            params = {};
         }
 
     }

@@ -5,20 +5,22 @@
 	<h2> Get persons Details -
 	</h2>
 	
-<!-- 	<div class="col-lg-4">
+	<div class="col-lg-4">
 		<md-autocomplete
           md-search-text-change="vm.searchUser(vm.searchText)"
+          md-selected-item-change="vm.myFamily(item.uId)"
           md-search-text="vm.searchText"
           md-items="item in vm.allUsers"
+          md-item-text="item.firstName"
           placeholder="Get Details">
         <md-item-template>
-          <span md-highlight-text="vm.searchText" md-highlight-flags="^i">{{item.display}}</span>
+          <span md-highlight-text="vm.searchText" md-highlight-flags="^i">{{item.firstName}} {{item.lastName}}</span>
         </md-item-template>
         <md-not-found>
           No states matching "{{vm.searchText}}" were found.
         </md-not-found>
       </md-autocomplete>
-	</div> -->
+	</div>
 
 </div>
 <div class="col-lg-12">
