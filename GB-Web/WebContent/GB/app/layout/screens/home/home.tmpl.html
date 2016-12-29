@@ -1,17 +1,17 @@
 
-<div class="container">
+<div class="container" style="background: whitesmoke;">
 <div class="col-lg-12">
-
-	<h2> Get persons Details -
-	</h2>
-	
+	<center><h1>Welcome to GB</h1></center>
 	<div class="col-lg-4">
+		<h2>Enter Person Name :</h2>
+	</div>
+	<div class="col-lg-8">
 		<md-autocomplete
           md-search-text-change="vm.searchUser(vm.searchText)"
           md-selected-item-change="vm.myFamily(item.uId)"
           md-search-text="vm.searchText"
           md-items="item in vm.allUsers"
-          md-item-text="item.firstName"
+          md-item-text="item.firstName +' '+item.lastName"
           placeholder="Get Details">
         <md-item-template>
           <span md-highlight-text="vm.searchText" md-highlight-flags="^i">{{item.firstName}} {{item.lastName}}</span>
@@ -23,44 +23,49 @@
 	</div>
 
 </div>
-<div class="col-lg-12">
-	
+<div class="col-lg-12" style="text-align: center;background: #696a6b;">
 		<div ng-repeat="user in vm.userDetail" class="row"> 
 			
-			<div class="col-lg-2">
+			<div class="col-lg-3">
 				<div ng-if= "user.fatherName">
+					<div style="font-size: 14px;" class="label">Father Name :</div>
 					<md-button class="md-raised" ng-click="vm.myFamily(user.fatherName.uid)">{{user.fatherName.firstName}} {{user.fatherName.lastname}}</md-button>
 					<!-- <button class="btn btn-default" ></button> -->
 				</div>
 			</div>
-			<div class="col-lg-1"></div>
+			<div class="col-lg-3"></div>
 			
-			<div class="col-lg-2">
+			<div class="col-lg-3">
 				<div ng-if= "user.motherName">
+					<div style="font-size: 14px;" class="label">Mother Name :</div>
 					<md-button class="md-raised" ng-click="vm.myFamily(user.motherName.uid)">{{user.motherName.firstName}} {{user.motherName.lastname}}</md-button>
 					<!-- <button class="btn btn-default" ng-click="vm.myFamily(user.motherName.uid)">{{user.motherName.firstName}} {{user.motherName.lastname}}</button> -->
 				</div>
 			</div>
-		
+			<div ng-if="!user.fatherName && !user.motherName" class="col-lg-8 col-lg-offset-2">
+			No Record Found.Please contact <a href="">GB Admin</a> for adding your data.</div>
 		</div>
-		<div class="row">
-			<div class="col-lg-4 col-lg-offset-2">
-			<md-button class="md-raised md-primary" ng-click="vm.myFamily(17)">{{vm.userDetail[0].firstName ||  'GetDetails'}}</md-button>
+		<div class="row" ng-if="vm.userDetail && vm.userDetail[0].firstName">
+			<div class="col-lg-4">
+			<div style="font-size: 14px;" class="label">Person Name :</div>
+			<md-button class="md-raised md-primary" ng-click="vm.myFamily(vm.userDetail[0].uid)">{{vm.userDetail[0].firstName}} {{vm.userDetail[0].lastname}}</md-button>
+			</div>
+			<div class="col-lg-4" ng-if="vm.userDetail[0].spouseName">
+			<div style="font-size: 14px;" class="label">Spouse Name :</div>
+			<md-button class="md-raised md-warn" ng-click="vm.myFamily(vm.userDetail[0].spouseName.uid)">{{vm.userDetail[0].spouseName.firstName}} {{vm.userDetail[0].spouseName.lastname}}</md-button>
 			</div>
 			
 		</div>
 		
 		<div ng-repeat="user in vm.userDetail" class="row"> 
 			
-			<div class="col-lg-2" ng-repeat="child in user.childrens">
+			<div class="col-lg-3" ng-repeat="child in user.childrens">
 				<div ng-if= "child.firstName">
 					<md-button class="md-raised" ng-click="vm.myFamily(child.uid)">{{child.firstName}} {{child.lastname}}</md-button>
 					<!-- <button class="btn btn-default" ng-click="vm.myFamily(child.uid)">{{child.firstName}} {{child.lastname}}</button> -->
 				</div>
 			</div>
 		</div>
-		
-		
 </div>
 
 
