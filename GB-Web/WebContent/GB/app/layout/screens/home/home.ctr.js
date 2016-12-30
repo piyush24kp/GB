@@ -20,6 +20,9 @@
 
         function getFamily(uid) {
             resetParam();
+            if (!uid) {
+                return false;
+            }
             params.uid = uid;
             return authfactory.getFamily(params).then(function successCallback(response) {
                 if (response.status === 200) {
