@@ -8,9 +8,9 @@
     homeCtr.$inject = ['$timeout', '$filter', '$q', 'config', '$rootScope', '$cookies', '$scope', '$location', 'authfactory'];
 
     function homeCtr($timeout, $filter, $q, config, $rootScope, $cookies, $scope, $location, authfactory) {
-        /*jshint validthis: true */
         var vm = this;
         var params = {};
+        vm.allUsers = [];
 
         activate();
 
@@ -20,6 +20,9 @@
 
         function getFamily(uid) {
             resetParam();
+            if (!uid) {
+                return false;
+            }
             params.uid = uid;
             return authfactory.getFamily(params).then(function successCallback(response) {
                 if (response.status === 200) {
@@ -39,8 +42,12 @@
 
         function searchUser(name) {
             resetParam();
+            if (!name) {
+                return false;
+            }
             params.name = name;
             return authfactory.getUser(params).then(function successCallback(response) {
+                vm.allUsers = [];
                 if (response.status === 200) {
                     response = response.data;
 
